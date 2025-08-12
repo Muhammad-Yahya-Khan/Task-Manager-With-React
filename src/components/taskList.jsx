@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Trash, Check, ChevronDownIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function TaskList() {
 	const [tasks, setTasks] = useState([]);
@@ -28,6 +29,9 @@ function TaskList() {
 			deadline: null,
 			status: "pending",
 		},
+		validationSchema: Yup.object({
+			title: Yup.string().required("Title is required"),
+		}),
 		onSubmit: async (values) => {
 			setIsLoading(true);
 			try {
@@ -98,7 +102,8 @@ function TaskList() {
 					<div className="grid gap-4 py-4">
 						<div className="grid gap-2">
 							<Label htmlFor="title">Title</Label>
-							<Input id="title" name="title" value={editFormik.values.title} onChange={editFormik.handleChange} />
+							<Input id="title" name="title" value={editFormik.values.title} onChange={editFormik.handleChange} onBlur={editFormik.handleBlur} />
+							{editFormik.errors.title && editFormik.touched.title && <span className="text-red-500 text-xs">{editFormik.errors.title}</span>}
 						</div>
 						<div className="grid gap-2">
 							<Label htmlFor="description">Description</Label>

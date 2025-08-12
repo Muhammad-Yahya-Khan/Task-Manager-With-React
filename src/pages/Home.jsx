@@ -3,6 +3,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormik } from "formik";
+import * as Yup from "yup";
 import { toast } from "sonner";
 import { collection, addDoc } from "firebase/firestore";
 import { db, auth, signOut } from "../firebaseConfig";
@@ -36,8 +37,15 @@ const Home = () => {
 		deadline: null,
 	};
 
+	const taskSchema = Yup.object().shape({
+		title: Yup.string().required("Title is required"),
+		description: Yup.string(),
+		deadline: Yup.date().nullable(),
+	});
+
 	const formik = useFormik({
 		initialValues: initialValues,
+		validationSchema: taskSchema,
 		onSubmit: async (values) => {
 			setLoading(true);
 			try {
@@ -90,11 +98,12 @@ const Home = () => {
 								<form className="space-y-4">
 									<div className="space-y-2">
 										<Label htmlFor="title">Title</Label>
-										<Input id="title" name="title" value={formik.values.title} onChange={formik.handleChange} placeholder="Enter task title" required />
+										<Input id="title" name="title" value={formik.values.title} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Enter task title" />
+										{formik.errors.title && formik.touched.title && <span className="text-red-500 text-xs">{formik.errors.title}</span>}
 									</div>
 									<div className="space-y-2">
 										<Label htmlFor="description">Description</Label>
-										<Input id="description" name="description" value={formik.values.description} onChange={formik.handleChange} placeholder="Enter task description" required />
+										<Input id="description" name="description" value={formik.values.description} onChange={formik.handleChange} onBlur={formik.handleBlur} placeholder="Enter task description" />
 									</div>
 									<div className="space-y-2">
 										<Label htmlFor="deadline">Deadline</Label>
