@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-// import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "sonner";
@@ -78,96 +77,96 @@ const SignUp = () => {
             }
         },
     });
+
     return (
-        <>
-            <div className="flex justify-center items-center h-screen">
-                <Card className="w-full max-w-sm">
-                    <CardHeader>
-                        <CardTitle>Create An Account</CardTitle>
-                        <CardDescription>
-                            Enter your email below to create your account
-                        </CardDescription>
-                    </CardHeader>
+        <div className="flex justify-center items-center h-screen">
+            <Card className="w-full max-w-sm">
+                <CardHeader>
+                    <CardTitle>Create An Account</CardTitle>
+                    <CardDescription>
+                        Enter your email below to create your account
+                    </CardDescription>
+                </CardHeader>
+
+                <form onSubmit={formik.handleSubmit}>
                     <CardContent>
-                        <form onSubmit={formik.handleSubmit}>
-                            <div className="flex flex-col gap-6">
-                                <div className="grid gap-2">
-                                    <Label htmlFor="name">Name</Label>
-                                    <Input
-                                        name="name"
-                                        id="name"
-                                        type="text"
-                                        placeholder="Your name"
-                                        value={formik.values.name}
-                                        onChange={formik.handleChange}
-                                        required
-                                    />
-                                </div>
-                                {formik.errors.name && formik.touched.name && (
-                                    <span className="text-red-500 text-[12px]">
-                                        {formik.errors.name}
-                                    </span>
-                                )}
-
-                                <div className="grid gap-2">
-                                    <Label htmlFor="email">Email</Label>
-                                    <Input
-                                        name="email"
-                                        id="email"
-                                        type="email"
-                                        placeholder="m@example.com"
-                                        value={formik.values.email}
-                                        onChange={formik.handleChange}
-                                        required
-                                    />
-                                </div>
-                                {formik.errors.email &&
-                                    formik.touched.email && (
-                                        <span className="text-red-500 text-[12px]">
-                                            {formik.errors.email}
-                                        </span>
-                                    )}
-
-                                <div className="grid gap-2">
-                                    <Label htmlFor="password">Password</Label>
-                                    <Input
-                                        name="password"
-                                        id="password"
-                                        type="password"
-                                        value={formik.values.password}
-                                        onChange={formik.handleChange}
-                                        required
-                                    />
-                                    {formik.errors.password &&
-                                    formik.touched.password ? (
-                                        <span className="text-red-500 text-[12px]">
-                                            {formik.errors.password}
-                                        </span>
-                                    ) : null}
-                                </div>
-
-                                <div className="grid gap-2">
-                                    <Label htmlFor="confirmPassword">
-                                        Confirm Password
-                                    </Label>
-                                    <Input
-                                        name="confirmPassword"
-                                        id="confirmPassword"
-                                        type="password"
-                                        value={formik.values.confirmPassword}
-                                        onChange={formik.handleChange}
-                                        required
-                                    />
-                                    {formik.errors.confirmPassword &&
-                                    formik.touched.confirmPassword ? (
-                                        <span className="text-red-500 text-[12px]">
-                                            {formik.errors.confirmPassword}
-                                        </span>
-                                    ) : null}
-                                </div>
+                        <div className="flex flex-col gap-6">
+                            <div className="grid gap-2">
+                                <Label htmlFor="name">Name</Label>
+                                <Input
+                                    name="name"
+                                    id="name"
+                                    type="text"
+                                    placeholder="Your name"
+                                    value={formik.values.name}
+                                    onChange={formik.handleChange}
+                                    required
+                                />
                             </div>
-                        </form>
+                            {formik.errors.name && formik.touched.name && (
+                                <span className="text-red-500 text-[12px]">
+                                    {formik.errors.name}
+                                </span>
+                            )}
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input
+                                    name="email"
+                                    id="email"
+                                    type="email"
+                                    placeholder="m@example.com"
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                    required
+                                />
+                            </div>
+                            {formik.errors.email && formik.touched.email && (
+                                <span className="text-red-500 text-[12px]">
+                                    {formik.errors.email}
+                                </span>
+                            )}
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="password">Password</Label>
+                                <Input
+                                    name="password"
+                                    id="password"
+                                    type="password"
+                                    value={formik.values.password}
+                                    onChange={formik.handleChange}
+                                    required
+                                />
+                                {formik.errors.password &&
+                                formik.touched.password ? (
+                                    <span className="text-red-500 text-[12px]">
+                                        {formik.errors.password}
+                                    </span>
+                                ) : null}
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="confirmPassword">
+                                    Confirm Password
+                                </Label>
+                                <Input
+                                    name="confirmPassword"
+                                    id="confirmPassword"
+                                    type="password"
+                                    value={formik.values.confirmPassword}
+                                    onChange={formik.handleChange}
+                                    required
+                                />
+                                {formik.errors.confirmPassword &&
+                                formik.touched.confirmPassword ? (
+                                    <span className="text-red-500 text-[12px]">
+                                        {formik.errors.confirmPassword}
+                                    </span>
+                                ) : null}
+                            </div>
+                        </div>
                     </CardContent>
+
                     <CardFooter className="flex-col gap-2">
                         <Button type="submit" className="w-full font-bold">
                             Sign Up
@@ -182,9 +181,9 @@ const SignUp = () => {
                             </Link>
                         </p>
                     </CardFooter>
-                </Card>{" "}
-            </div>
-        </>
+                </form>
+            </Card>
+        </div>
     );
 };
 
