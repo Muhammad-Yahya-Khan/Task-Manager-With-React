@@ -115,7 +115,15 @@ const Login = () => {
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <form>
+                        <form
+                            onSubmit={formik.handleSubmit}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    e.preventDefault();
+                                    formik.submitForm();
+                                }
+                            }}
+                        >
                             <div className="flex flex-col gap-6">
                                 <div className="grid gap-2">
                                     <Label htmlFor="email">Email</Label>
@@ -147,7 +155,20 @@ const Login = () => {
                                         onChange={formik.handleChange}
                                         required
                                     />
+
+                                    <div className="w-full text-right mt-0">
+                                        <button
+                                            type="button"
+                                            className="text-sm text-muted-foreground hover:text-primary"
+                                            onClick={() =>
+                                                setResetDialogOpen(true)
+                                            }
+                                        >
+                                            Forgot Password?
+                                        </button>
+                                    </div>
                                 </div>
+
                                 {formik.errors.password &&
                                     formik.touched.password && (
                                         <span className="text-red-500 text-[12px]">
@@ -157,16 +178,7 @@ const Login = () => {
                             </div>
                         </form>
                     </CardContent>
-                    <CardFooter className="flex-col gap-2">
-                        <div className="w-full text-right">
-                            <button
-                                type="button"
-                                className="text-sm text-muted-foreground hover:text-primary mb-2"
-                                onClick={() => setResetDialogOpen(true)}
-                            >
-                                Forgot Password?
-                            </button>
-                        </div>
+                    <CardFooter className="flex-col gap-2 -mt-3">
                         <Button
                             type="submit"
                             className="w-full font-bold"
@@ -174,9 +186,7 @@ const Login = () => {
                         >
                             Login
                         </Button>
-                        <Button variant="outline" className="w-full">
-                            Login with Google
-                        </Button>
+
                         <p className="text-sm text-center">
                             Don't have an account?{" "}
                             <Link

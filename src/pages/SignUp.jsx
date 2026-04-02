@@ -88,7 +88,15 @@ const SignUp = () => {
                     </CardDescription>
                 </CardHeader>
 
-                <form onSubmit={formik.handleSubmit}>
+                <form
+                    onSubmit={formik.handleSubmit}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            formik.submitForm();
+                        }
+                    }}
+                >
                     <CardContent>
                         <div className="flex flex-col gap-6">
                             <div className="grid gap-2">
@@ -167,7 +175,7 @@ const SignUp = () => {
                         </div>
                     </CardContent>
 
-                    <CardFooter className="flex-col gap-2">
+                    <CardFooter className="flex-col gap-2 mt-4">
                         <Button type="submit" className="w-full font-bold">
                             Sign Up
                         </Button>
